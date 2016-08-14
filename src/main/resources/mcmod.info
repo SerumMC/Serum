@@ -1,0 +1,14 @@
+[
+  {
+    "modid": "serum",
+    "name": "Serum",
+    "version": "${version}",
+    "authorList": [
+      "Darkhax",
+      "cyb3rkat",
+      "iLexiconn"
+    ],
+    "url": "https://github.com/SerumMC",
+    "description": ""
+  }
+]
