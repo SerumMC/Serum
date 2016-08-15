@@ -14,10 +14,15 @@ buildscript {
 apply plugin: "net.minecraftforge.gradle.forge"
 
 def mod_file = getModFile()
+def build = System.getenv().BUILD_NUMBER;
 version = getVersion("VERSION", mod_file)
-group = "net.ilexiconn"
-archivesBaseName = "nationsglory"
+group = "serum"
+archivesBaseName = "serum"
 sourceCompatibility = targetCompatibility = "1.8"
+
+if (build) {
+    version += ".${build}"
+}
 
 minecraft {
     version = "1.10.2-12.18.1.2050"
@@ -75,3 +80,14 @@ String getVersion(String type, String mod_file) {
     }
     return "$major.$revision.$patch";
 }
+
+task writeVersion << {
+    if (build) {
+        def buildFile = new File("src/main/resources/version")
+        buildFile.withWriter("UTF-8") { writer ->
+            writer.write("${build}")
+        }
+    }
+}
+
+build.dependsOn(writeVersion)
